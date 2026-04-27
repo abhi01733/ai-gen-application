@@ -1,0 +1,81 @@
+@import "tailwindcss";
+
+@import url('https://fonts.googleapis.com/css2?family=VT323&family=JetBrains+Mono:wght@800&display=swap');
+@import "tailwindcss";
+
+@theme {
+  --font-sans: "VT323", monospace;
+  --font-mono: "JetBrains Mono", monospace;
+
+  --color-glitch-cyan: #00ffff;
+  --color-glitch-magenta: #ff00ff;
+  --color-glitch-bg: #0a0a0a;
+}
+
+@layer utilities {
+  .text-glitch {
+    text-shadow: 
+      0.05em 0 0 var(--color-glitch-magenta),
+      -0.025em -0.05em 0 var(--color-glitch-cyan),
+      0.025em 0.05em 0 #fff;
+    animation: glitch 500ms infinite;
+  }
+
+  .border-glitch {
+    border: 3px solid #fff;
+    box-shadow: 
+      2px 2px 0 var(--color-glitch-magenta),
+      -2px -2px 0 var(--color-glitch-cyan);
+  }
+
+  .bg-scanner {
+    background: linear-gradient(
+      transparent 50%, 
+      rgba(18, 16, 16, 0.2) 50%, 
+      rgba(18, 16, 16, 0.2) 51%, 
+      transparent 51%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+  }
+
+  @keyframes glitch {
+    0% {
+      text-shadow: 0.05em 0 0 var(--color-glitch-magenta), -0.025em -0.05em 0 var(--color-glitch-cyan), 0.025em 0.05em 0 #fff;
+    }
+    14% {
+      text-shadow: 0.05em 0 0 var(--color-glitch-magenta), -0.025em -0.05em 0 var(--color-glitch-cyan), 0.025em 0.05em 0 #fff;
+    }
+    15% {
+      text-shadow: -0.05em -0.025em 0 var(--color-glitch-magenta), 0.025em 0.025em 0 var(--color-glitch-cyan), -0.05em -0.05em 0 #fff;
+    }
+    49% {
+      text-shadow: -0.05em -0.025em 0 var(--color-glitch-magenta), 0.025em 0.025em 0 var(--color-glitch-cyan), -0.05em -0.05em 0 #fff;
+    }
+    50% {
+      text-shadow: 0.025em 0.05em 0 var(--color-glitch-magenta), 0.05em 0 0 var(--color-glitch-cyan), 0 -0.05em 0 #fff;
+    }
+    99% {
+      text-shadow: 0.025em 0.05em 0 var(--color-glitch-magenta), 0.05em 0 0 var(--color-glitch-cyan), 0 -0.05em 0 #fff;
+    }
+    100% {
+      text-shadow: -0.025em 0 0 var(--color-glitch-magenta), -0.025em -0.025em 0 var(--color-glitch-cyan), -0.025em -0.05em 0 #fff;
+    }
+  }
+
+  .tearing-effect {
+    animation: tearing 4s infinite linear alternate;
+  }
+
+  @keyframes tearing {
+    0% { transform: skew(0deg); opacity: 1; }
+    5% { transform: skew(3deg); opacity: 0.8; }
+    10% { transform: skew(0deg); opacity: 1; }
+    15% { transform: skew(-5deg); opacity: 0.9; }
+    20% { transform: skew(0deg); opacity: 1; }
+  }
+}
+
+body {
+  @apply bg-glitch-bg text-white antialiased overflow-hidden font-sans;
+}
